@@ -6,8 +6,10 @@ public class CountriesApp {
 
 	public static void main(String[] args) {
 		// Initializes directory and filename, if not created
-		String dir = "resources";
+		String dir = "src/countries";
 		String fileName = "countries.txt";
+		String temp = "temp";
+		String tempFile = "temp.txt";
 
 		CountriesTextFile.createDirectory(dir);
 		CountriesTextFile.createFile(dir, fileName);
@@ -15,6 +17,7 @@ public class CountriesApp {
 		Scanner scan = new Scanner(System.in);
 		int menuInput;
 		String countryInput;
+		Country country;
 		boolean cont = true;
 
 		for (int i = 0; i < 29; i++) {
@@ -36,9 +39,19 @@ public class CountriesApp {
 
 			switch (menuInput) {
 			case 1:
+				System.out.println();
+				
+				CountriesTextFile.readFromFile(dir, fileName);
+				
 				displayCountry();
 				break;
 			case 2:
+				System.out.println();
+				
+				countryInput = Validator.getString(scan, "Please type the name of the country: ");
+				country = new Country(countryInput);
+				CountriesTextFile.writeToFile(country, dir, fileName);
+				
 				enterCountry();
 				break;
 			case 3:
@@ -56,6 +69,7 @@ public class CountriesApp {
 	}
 
 	public static void displayCountry() {
+		
 
 	}
 
@@ -64,6 +78,10 @@ public class CountriesApp {
 	}
 
 	public static void removeCountry() {
+		CountriesTextFile.createDirectory("temp");
+		CountriesTextFile.createFile("temp", "temp.txt");
+		
+		
 
 	}
 
